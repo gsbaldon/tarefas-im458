@@ -9,7 +9,9 @@ import pickle
 def pde_convex(x, y):
     dy_x = dde.grad.jacobian((y**2), x, i=0, j=0)
     dy_t = dde.grad.jacobian(y, x, i=0, j=1)
-    dy_xx = dde.grad.hessian(y, x, i=0, j=0)
+    dy = dde.grad.jacobian(y, x, i=0, j=0)
+    dy_xx = dde.grad.jacobian(dy, x, i=0, j=0)
+    # dy_xx = dde.grad.hessian(y, x, i=0, j=0)
     return dy_t + dy_x - 0.0025*dy_xx
 
 def pde_concave(x, y):
